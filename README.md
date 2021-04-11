@@ -172,6 +172,8 @@ En cherchant ce type d'élément d'interface adapté pour Vue, on découvre le f
 
 - 1. Installez le framework dans votre projet grâce à la commande dans le CLI, et **choisir le preset Prototype (rapid development)**.
      https://vuetifyjs.com/en/getting-started/quick-start/#vue-cli-install
+![image](https://user-images.githubusercontent.com/632197/114319012-e0026480-9b0f-11eb-8ee0-122f0b117a62.png)
+
 
 - 2. Dans `MovieCreation`, appelez le composant `v-rating` en lui passant bien votre donnée.
      https://vuetifyjs.com/en/components/ratings/
