@@ -135,14 +135,41 @@ En utilisant un Event Bus, on va pouvoir faire communiquer n'importe quels compo
 
 ![Schéma Event bus](./event-bus.png)
 
-TODO: Ajouter utilisation SASS
+## 5. Mettre en forme efficacement
 
-## 5. Utiliser un composant externe
+Notre application prenant forme, il est temps de se soucier de son rendu.
+
+C'est l'occasion de découvrir SASS, un préprocesseur CSS. Comme un framework, il étend les fonctionnalités de CSS pour nous aider à écrire du style efficacement.
+
+Site officiel: https://sass-lang.com/guide
+
+Tester SASS: https://www.sassmeister.com/
+
+Notre projet étant compilé, on peut utiliser SASS à condition de charger son loader:
+
+```bash
+npm install --save-dev sass sass-loader@10
+```
+
+Ajoutez `lang="scss"` aux balises de style quand vous voulez écrire du SASS.
+
+```html
+<style lang="scss">
+  // On peut maintenant utiliser Sass !
+</style>
+```
+
+1. Choisissez une couleur principale et [créez lui une variable](https://sass-lang.com/guide#topic-2).
+2. Créez une seconde variable contenant un version assombrie de votre couleur principale [grâce à la fonction `darken()`](https://sass-lang.com/documentation/modules/color#darken).
+3. Définissez un style de bouton qui a comme couleur de fond votre couleur principale, et au survol la version assombrie. Utilise le nesting et [le sélecteur parent](https://sass-lang.com/documentation/style-rules/parent-selector) pour simplifier la déclaration
+4. Mettez en forme le composant `Movie` selon vos goûts, grâce à Sass.
+
+## 6. Utiliser un composant externe
 
 Pour renseigner la note d'un film dans `MovieCreation`, on se rend compte que la saisie utilisateur pourrait être facilitée en utilisant un contrôle "Star rating".
 En cherchant ce type d'élément d'interface adapté pour Vue, on découvre le framework Material Design **Vuetify**, qui contient un composant de Star Rating.
 
-- 1. Installez le framework dans votre projet grâce à la commande dans le CLI.
+- 1. Installez le framework dans votre projet grâce à la commande dans le CLI, et **choisir le preset Prototype (rapid development)**.
      https://vuetifyjs.com/en/getting-started/quick-start/#vue-cli-install
 
 - 2. Dans `MovieCreation`, appelez le composant `v-rating` en lui passant bien votre donnée.
@@ -153,7 +180,7 @@ En passant par vue-cli pour l'installation, Vuetify sera installé dans l'app en
 
 Envie de charger les composants de Vuetify manuellement, un à un ? C'est aussi possible, voir https://vuetifyjs.com/en/features/treeshaking/#manually-importing
 
-## 6. Requêter une API pour proposer une auto-suggestion de film
+## 7. Requêter une API pour proposer une auto-suggestion de film
 
 Pour facilier l'ajout de film à notre liste, on veut maintenant proposer un autocomplete depuis le champ de saisie du titre. Dans cette liste de suggestion, le clic sur un film remplira rapidement les champs du formulaire d'ajout.
 
@@ -222,7 +249,7 @@ https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesse
 
 Utiliser async/await, les fonctions asynchrones de ES2017 : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/async_function
 
-## 7. Router : afficher les détails d'un film dans une page en ajoutant manuellement le routeur
+## 8. Router : afficher les détails d'un film dans une page en ajoutant manuellement le routeur
 
 Depuis notre liste, on souhaite pouvoir afficher le détail d'un film pour voir sa description et l'avis que vous lui avez donné. Pour cela on souhaite pouvoir naviguer sur une page dédiée, et on a donc besoin d'ajouter un router à notre application.
 
