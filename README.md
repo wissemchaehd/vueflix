@@ -86,7 +86,7 @@ _Notre page présente maintenant une liste synthétique des films._
 **Important : comment copier des objets en JS**
 https://www.javascripttutorial.net/object/3-ways-to-copy-objects-in-javascript/
 
-5. Créez un filtre de tri par catégorie. Mettez bien à jour le compte du nombre de films affichés une fois le filtre appliqué.
+5. Créez un filtre de tri par catégorie grâce à une propriété calculée. Mettez bien à jour le compte du nombre de films affichés une fois le filtre appliqué.
 
 ## 3. Création d'un composant `Movie` pour représenter un film
 
@@ -276,3 +276,5 @@ Pour l'utilisation, nous allons avoir besoin des deux composants fournis par Vue
 
 https://vueschool.io/courses/vue-router-for-everyone
 Les 3 lecons du chapitre "Introduction to Vue Router"
+
+## 9. Déploiement : publier l'application
