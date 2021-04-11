@@ -38,7 +38,8 @@ Pour créer votre nouveau projet **vueflix** :
 vue create vueflix
 ```
 
-Si des questions vous sont posées, choisissez les options par défaut.
+Si des questions vous sont posées, choisissez les options par défaut, Vue 2.
+![image](https://user-images.githubusercontent.com/632197/114316682-d6273400-9b04-11eb-85f0-a9f68a725115.png)
 
 Suivez ensuite les instructions contenues dans le fichier `README.md`, et lancez le projet.
 
