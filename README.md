@@ -30,6 +30,39 @@ Vous travaillerez sur une branche par fonctionnalité, en respectant le [Feature
 - [ ] Créez une branche `mise-en-place-git` depuis `main`.
 - [ ] [Commitez la complétion](https://user-images.githubusercontent.com/632197/42737442-a94e7534-8873-11e8-82fa-75d178493074.png) des 3 étapes de cet exercice sur `mise-en-place-git`, puis ouvrez une Pull Request vers `main` sur votre repo.
 
+Vous aurez ainsi un projet dont vous serez propriétaire, et pourrez récupérer les dernières modifications.
+
+_Pour cela, dans un git bash :_
+
+```bash
+git clone <URL_DE_VOTRE_FORK>
+# Choisir url https, ou ssh si vous avez un clé ssh configurée sur votre machine
+cd <NOM_DU_DOSSIER>
+
+# ajouter mon repo comme remote supplémentaire
+git remote add campus git@github.com:le-campus-numerique/JS_vue-Vueflix-2021.git
+# ou https://github.com/le-campus-numerique/JS_vue-Vueflix-2021.git en HTTPS
+
+# pour vérifier mes remotes
+git remote -v
+
+# pour récupérer les modifications depuis chez le campus
+git pull campus main
+```
+
+_Pour aller voir ce que les collègues ont fait, on peut les ajouter aussi comme remote supplémentaires_
+```
+# ajouter collègue comme remote supplémenaire
+git remote add collegue git@github.com:collegue/JS_vue-Vueflix-2021.git
+
+# télécharger les modification du projet du collègue
+git fetch collegue
+
+# pour voir le contenu de sa branche super-feature
+git branch super-feature collegue/super-feature
+```
+
+
 ## 1. Initialiser une application Vue.
 
 ##### Outil en ligne de commande Vue : le Vue CLI
