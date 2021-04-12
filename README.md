@@ -51,7 +51,7 @@ git pull campus main
 ```
 
 _Pour aller voir ce que les collègues ont fait, on peut les ajouter aussi comme remote supplémentaires_
-```
+```bash
 # ajouter collègue comme remote supplémenaire
 git remote add collegue git@github.com:collegue/JS_vue-Vueflix-2021.git
 
