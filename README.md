@@ -20,7 +20,7 @@ Tout votre travail doit être fait en utilisant **Git**. Votre avancement devra 
 
 Vous travaillerez sur une branche par fonctionnalité, en respectant le [Feature Branch Workflow](https://www.atlassian.com/fr/git/tutorials/comparing-workflows/feature-branch-workflow). 
 
-- Tous les commits doivent etre fait sur une branche dédiée à la fonctionnalité, par ex. `create-grid`, `handle-placement-errors`, `attack-animations`, `ships-images` ... Une grande fonctionnalité peut par exemple être un chapitre de ce sujet.
+- Tous les commits doivent etre fait sur une branche dédiée à la fonctionnalité, par ex. `create-project`, `list-movies`, `add-gender-filter`, `movie-add-form` ... Une grande fonctionnalité peut par exemple être un chapitre de ce sujet.
 - Une fois poussés, les commits doivent être présentés dans une Pull Request.
 - Chaque Pull Request doit être lue et validée, puis mergée par un **autre membre** de votre ilôt.
 
