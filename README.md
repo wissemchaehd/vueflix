@@ -20,15 +20,15 @@ Tout votre travail doit être fait en utilisant **Git**. Votre avancement devra 
 
 Vous travaillerez sur une branche par fonctionnalité, en respectant le [Feature Branch Workflow](https://www.atlassian.com/fr/git/tutorials/comparing-workflows/feature-branch-workflow). 
 
-- Tous les commits doivent etre fait sur une branche dédiée à la fonctionnalité, par ex. `create-grid`, `handle-placement-errors`, `attack-animations`, `ships-images` ...
+- Tous les commits doivent etre fait sur une branche dédiée à la fonctionnalité, par ex. `create-grid`, `handle-placement-errors`, `attack-animations`, `ships-images` ... Une grande fonctionnalité peut par exemple être un chapitre de ce sujet.
 - Une fois poussés, les commits doivent être présentés dans une Pull Request.
 - Chaque Pull Request doit être lue et validée, puis mergée par un **autre membre** de votre ilôt.
 
-## Itération 0 : Préparation du projet
+## 0. Préparation du projet
 ### Mettre en place son repo Git 
 - [ ] Forkez ce repo, et clonez votre fork
 - [ ] Créez une branche `mise-en-place-git` depuis `master`.
-- [ ] [Commitez la complétion](https://user-images.githubusercontent.com/632197/42737442-a94e7534-8873-11e8-82fa-75d178493074.png) des 3 étapes de cet exercice sur `mise-en-place-git`, puis ouvrez une Pull Request vers `master` sur votre repo.
+- [ ] [Commitez la complétion](https://user-images.githubusercontent.com/632197/42737442-a94e7534-8873-11e8-82fa-75d178493074.png) des 3 étapes de cet exercice sur `mise-en-place-git`, puis ouvrez une Pull Request vers `main` sur votre repo.
 
 ## 1. Initialiser une application Vue.
 
