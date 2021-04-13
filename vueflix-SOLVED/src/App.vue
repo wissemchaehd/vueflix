@@ -73,13 +73,15 @@ export default {
   },
   methods: {
     addMovie() {
-      // // TODO: Transformer le genre en array
-
+      // Isole "genres" du retour du formulaire
+      let { genres, ...newMovie } = this.tempMovie;
+      // Transforme genre en array
+      // et le rajoute dans newMovie
+      newMovie.genres = genres.split(" ");
       // Ajoute le nouveau film à la collection
       // En faisant un copie "shallow copy"
-      this.movies.push({ ...this.tempMovie });
-
-      // Vider le formulaire
+      this.movies.push({ ...newMovie });
+      // Vide le formulaire
       this.tempMovie = {};
     },
   },
