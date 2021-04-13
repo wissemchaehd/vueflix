@@ -14,18 +14,20 @@ Voici la liste de besoins que vous avez noté :
 
 ### ⚠️ Modalités de rendu ⚠️
 
-Tout votre travail doit être fait en utilisant **Git**. Votre avancement devra être présenté par un commit minimum par exercice, avec un message reprenant l'intitulé de l'exercice. 
+Tout votre travail doit être fait en utilisant **Git**. Votre avancement devra être présenté par un commit minimum par exercice, avec un message reprenant l'intitulé de l'exercice.
 
-*Les fichiers readme sont [au format Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). Pour chaque exercice que vous compléterez, cochez la case dans le sujet en rajoutant une croix.* 
+_Les fichiers readme sont [au format Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). Pour chaque exercice que vous compléterez, cochez la case dans le sujet en rajoutant une croix._
 
-Vous travaillerez sur une branche par fonctionnalité, en respectant le [Feature Branch Workflow](https://www.atlassian.com/fr/git/tutorials/comparing-workflows/feature-branch-workflow). 
+Vous travaillerez sur une branche par fonctionnalité, en respectant le [Feature Branch Workflow](https://www.atlassian.com/fr/git/tutorials/comparing-workflows/feature-branch-workflow).
 
 - Tous les commits doivent etre fait sur une branche dédiée à la fonctionnalité, par ex. `create-project`, `list-movies`, `add-gender-filter`, `movie-add-form` ... Une grande fonctionnalité peut par exemple être un chapitre de ce sujet.
 - Une fois poussés, les commits doivent être présentés dans une Pull Request.
 - Chaque Pull Request doit être lue et validée, puis mergée par un **autre membre** de votre ilôt.
 
 ## 0. Préparation du projet
-### Mettre en place son repo Git 
+
+### Mettre en place son repo Git
+
 - [ ] Forkez ce repo, et clonez votre fork
 - [ ] Créez une branche `mise-en-place-git` depuis `main`.
 - [ ] [Commitez la complétion](https://user-images.githubusercontent.com/632197/42737442-a94e7534-8873-11e8-82fa-75d178493074.png) des 3 étapes de cet exercice sur `mise-en-place-git`, puis ouvrez une Pull Request vers `main` sur votre repo.
@@ -51,6 +53,7 @@ git pull campus main
 ```
 
 _Pour aller voir ce que les collègues ont fait, on peut les ajouter aussi comme remote supplémentaires_
+
 ```bash
 # ajouter collègue comme remote supplémenaire
 git remote add collegue git@github.com:collegue/JS_vue-Vueflix-2021.git
@@ -61,7 +64,6 @@ git fetch collegue
 # pour voir le contenu de sa branche super-feature
 git branch super-feature collegue/super-feature
 ```
-
 
 ## 1. Initialiser une application Vue.
 
@@ -223,8 +225,7 @@ En cherchant ce type d'élément d'interface adapté pour Vue, on découvre le f
 
 - 1. Installez le framework dans votre projet grâce à la commande dans le CLI, et **choisir le preset Prototype (rapid development)**.
      https://vuetifyjs.com/en/getting-started/quick-start/#vue-cli-install
-![image](https://user-images.githubusercontent.com/632197/114319012-e0026480-9b0f-11eb-8ee0-122f0b117a62.png)
-
+     ![image](https://user-images.githubusercontent.com/632197/114319012-e0026480-9b0f-11eb-8ee0-122f0b117a62.png)
 
 - 2. Dans `MovieCreation`, appelez le composant `v-rating` en lui passant bien votre donnée.
      https://vuetifyjs.com/en/components/ratings/
@@ -329,3 +330,45 @@ https://vueschool.io/courses/vue-router-for-everyone
 Les 3 lecons du chapitre "Introduction to Vue Router"
 
 ## 9. Déploiement : publier l'application
+
+### Génération du projet en local
+
+Vous avez plusieurs commandes disponibles dans votre projet Node.
+Depuis la racine du projet, lancez la commande `build`
+
+```bash
+  npm run build
+```
+
+Cela va générer un build de notre application, dans le dossier `dist`.
+Le contenu de ce dossier est un projet HTML, CSS et JS, prêt à être rendu sur n'importe quel navigateur. C'est donc ces fichiers qu'on va
+pouvoir mettre sur un serveur.
+
+Pour tester cela, lancez un simple serveur local dans `dist` :
+
+```bash
+  cd dist
+  http-server
+```
+
+### Mise en ligne
+
+Votre code source est hébergé sur GitHub. GitHub propose également d'héberger des sites statiques et met à notre disposition une url par repo avec Github Pages
+
+Nous allons utiliser Github Page servir la version compilée de notre projet. Pour cela, il va nous falloir publier un branche qui contient le projet buildé, donc le contenu du dossier `dist`.
+
+En local, on peut créer un commande qui fait ce travail pour nous.
+
+- Suivez ce tutoriel pour créer ce script, en l'adaptant avec vos infos de repo.
+  https://cli.vuejs.org/guide/deployment.html#github-pages
+
+- Lancez ce script en ligne de commande, ou via un script npm.
+
+- Poussez votre nouvelle branche `gh-pages` avec son contenu.
+
+Depuis votre repo sur GitHub :
+
+- Configurez Pages depuis Settings > Pages
+- Choisissez comme "source" la branche `gh-pages`
+
+Votre projet sera disponible à l'adresse indiquée.
