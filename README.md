@@ -34,6 +34,8 @@ cd <NOM_DU_DOSSIER>
 
 ##### Outil en ligne de commande Vue : le Vue CLI
 
+https://cli.vuejs.org/
+
 Installez l'outil `vue-cli` avec NPM :
 
 ```bash
