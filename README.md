@@ -12,27 +12,15 @@ Voici la liste de besoins que vous avez noté :
 - ajouter un film à la liste
 - supprimer un film de la liste
 
-### ⚠️ Modalités de rendu ⚠️
-
-Tout votre travail doit être fait en utilisant **Git**. Votre avancement devra être présenté par un commit minimum par exercice, avec un message reprenant l'intitulé de l'exercice.
-
-_Les fichiers readme sont [au format Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). Pour chaque exercice que vous compléterez, cochez la case dans le sujet en rajoutant une croix._
-
-Vous travaillerez sur une branche par fonctionnalité, en respectant le [Feature Branch Workflow](https://www.atlassian.com/fr/git/tutorials/comparing-workflows/feature-branch-workflow).
-
-- Tous les commits doivent etre fait sur une branche dédiée à la fonctionnalité, par ex. `create-project`, `list-movies`, `add-gender-filter`, `movie-add-form` ... Une grande fonctionnalité peut par exemple être un chapitre de ce sujet.
-- Une fois poussés, les commits doivent être présentés dans une Pull Request.
-- Chaque Pull Request doit être lue et validée, puis mergée par un **autre membre** de votre ilôt.
-
 ## 0. Préparation du projet
 
 ### Mettre en place son repo Git
 
-- [ ] Forkez ce repo, et clonez votre fork
-- [ ] Créez une branche `mise-en-place-git` depuis `main`.
-- [ ] [Commitez la complétion](https://user-images.githubusercontent.com/632197/42737442-a94e7534-8873-11e8-82fa-75d178493074.png) des 3 étapes de cet exercice sur `mise-en-place-git`, puis ouvrez une Pull Request vers `main` sur votre repo.
+- [ ] Forkez ce repo
+- [ ] Clonez votre fork
+- [ ] Travaillez en local sur la branche de votre choix
 
-Vous aurez ainsi un projet dont vous serez propriétaire, et pourrez récupérer les dernières modifications.
+Vous aurez ainsi un projet dont vous serez propriétaire.
 
 _Pour cela, dans un git bash :_
 
@@ -40,29 +28,6 @@ _Pour cela, dans un git bash :_
 git clone <URL_DE_VOTRE_FORK>
 # Choisir url https, ou ssh si vous avez un clé ssh configurée sur votre machine
 cd <NOM_DU_DOSSIER>
-
-# ajouter mon repo comme remote supplémentaire
-git remote add campus git@github.com:le-campus-numerique/JS_vue-Vueflix-2021.git
-# ou https://github.com/le-campus-numerique/JS_vue-Vueflix-2021.git en HTTPS
-
-# pour vérifier mes remotes
-git remote -v
-
-# pour récupérer les modifications depuis chez le campus
-git pull campus main
-```
-
-_Pour aller voir ce que les collègues ont fait, on peut les ajouter aussi comme remote supplémentaires_
-
-```bash
-# ajouter collègue comme remote supplémenaire
-git remote add collegue git@github.com:collegue/JS_vue-Vueflix-2021.git
-
-# télécharger les modification du projet du collègue
-git fetch collegue
-
-# pour voir le contenu de sa branche super-feature
-git branch super-feature collegue/super-feature
 ```
 
 ## 1. Initialiser une application Vue.
