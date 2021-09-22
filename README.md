@@ -36,17 +36,18 @@ cd <NOM_DU_DOSSIER>
 
 https://cli.vuejs.org/
 
-Installez l'outil `vue-cli` avec NPM :
-
-```bash
-npm install -g @vue/cli
-```
-
 Vérifier que la version de Vue CLI installée est au moins la version 4 :
 
 ```bash
 vue --version
 ```
+Si ce n'est pas le cas installer l'outil `vue-cli` avec NPM :
+
+```bash
+npm install -g @vue/cli
+```
+
+
 
 Vue CLI vous sera utile pour créer vos projets Vue.js. Il vous permettra également de démarrer un serveur de développement pour tester vos projets en local.
 
@@ -120,7 +121,54 @@ https://www.javascripttutorial.net/object/3-ways-to-copy-objects-in-javascript/
 4. Donnez une valeur par défaut aux props que `Movie` peut recevoir
 5. Ajoutez une validation de type sur les props que `Movie` peut recevoir
 
-## 4. Création d'un composant `MovieCreation` pour ajouter un film
+## 4. Mettre en forme efficacement
+
+Notre application prenant forme, il est temps de se soucier de son rendu.
+
+C'est l'occasion de découvrir SASS, un préprocesseur CSS. Comme un framework, il étend les fonctionnalités de CSS pour nous aider à écrire du style efficacement.
+
+Site officiel: https://sass-lang.com/guide
+
+Tester SASS: https://www.sassmeister.com/
+
+Notre projet étant compilé, on peut utiliser SASS à condition de charger son loader:
+
+```bash
+npm install --save-dev sass sass-loader@10
+```
+
+Ajoutez `lang="scss"` aux balises de style quand vous voulez écrire du SASS.
+
+```html
+<style lang="scss">
+  // On peut maintenant utiliser Sass !
+</style>
+```
+
+1. Choisissez une couleur principale et [créez lui une variable](https://sass-lang.com/guide#topic-2).
+2. Créez une seconde variable contenant un version assombrie de votre couleur principale [grâce à la fonction `darken()`](https://sass-lang.com/documentation/modules/color#darken).
+3. Définissez un style de bouton qui a comme couleur de fond votre couleur principale, et au survol la version assombrie. Utilise le nesting et [le sélecteur parent](https://sass-lang.com/documentation/style-rules/parent-selector) pour simplifier la déclaration
+4. Mettez en forme le composant `Movie` selon vos goûts, grâce à Sass.
+
+
+## 5. Utiliser un composant externe
+
+Pour renseigner la note d'un film dans `MovieCreation`, on se rend compte que la saisie utilisateur pourrait être facilitée en utilisant un contrôle "Star rating".
+En cherchant ce type d'élément d'interface adapté pour Vue, on découvre le framework Material Design **Vuetify**, qui contient un composant de Star Rating.
+
+- 1. Installez le framework dans votre projet grâce à la commande dans le CLI, et **choisir le preset Prototype (rapid development)**.
+     https://vuetifyjs.com/en/getting-started/quick-start/#vue-cli-install
+     ![image](https://user-images.githubusercontent.com/632197/114319012-e0026480-9b0f-11eb-8ee0-122f0b117a62.png)
+
+- 2. Dans `MovieCreation`, appelez le composant `v-rating` en lui passant bien votre donnée.
+     https://vuetifyjs.com/en/components/ratings/
+- 2. Dans `Movie`, appelez le composant `v-rating` en mode non éditable, pour afficher la note uniquement.
+
+En passant par vue-cli pour l'installation, Vuetify sera installé dans l'app entière, en global.
+
+Envie de charger les composants de Vuetify manuellement, un à un ? C'est aussi possible, voir https://vuetifyjs.com/en/features/treeshaking/#manually-importing
+
+## 6. Création d'un composant `MovieCreation` pour ajouter un film
 
 1. Créez un composant `MovieCreation` contenant le formulaire d'ajout d'un film.
 2. Passez la donnée de `App` à `MovieCreation` en props pour l'affichage
@@ -156,53 +204,34 @@ En utilisant un Event Bus, on va pouvoir faire communiquer n'importe quels compo
 
 ![Schéma Event bus](./event-bus.png)
 
-## 5. Mettre en forme efficacement
 
-Notre application prenant forme, il est temps de se soucier de son rendu.
+## 7. Router : afficher les détails d'un film dans une page en ajoutant manuellement le routeur
 
-C'est l'occasion de découvrir SASS, un préprocesseur CSS. Comme un framework, il étend les fonctionnalités de CSS pour nous aider à écrire du style efficacement.
+Depuis notre liste, on souhaite pouvoir afficher le détail d'un film pour voir sa description et l'avis que vous lui avez donné. Pour cela on souhaite pouvoir naviguer sur une page dédiée, et on a donc besoin d'ajouter un router à notre application.
 
-Site officiel: https://sass-lang.com/guide
+Cela tombe bien, Vue a un routeur tout prêt que nous allons utiliser, [vue-router](https://router.vuejs.org/fr/)
 
-Tester SASS: https://www.sassmeister.com/
+Pour l'utilisation, nous allons avoir besoin des deux composants fournis par Vue Router :
 
-Notre projet étant compilé, on peut utiliser SASS à condition de charger son loader:
+- `<router-view>` affiche le contenu de la route correspondant au composant spécifié dans la déclaration.
+- `<router-link>` permet de passer d'une page à l'autre.
 
-```bash
-npm install --save-dev sass sass-loader@10
-```
+- 1. Installez la librarie `vue-router`. Définissez ensuite une table de router, une instance du plugin que vous importerez dans votre fichier `main.js` pour l'ajouter à l'instance de Vue de votre application. Alternativement, utilisez le `vue-cli` pour l'installation.
+- 2. Déclarez deux routes simple :
+    - une `/` qui affiche un message d'accueil.
+    - une `/admin` qui affiche la liste des films avec le formulaire d'ajout.
+- 3. Affichez un menu de navigation sur ces deux pages pour passer de l'une à l'autre.
+- 4. Créez une page pour afficher un film unique. Pour cela définissez la route `/movie/<id_du_film>` qui affichera un film en pleine page, donc notre composant `Movie`. Ajoutez également un lien depuis la liste de films qui amène à cette page de détail.
+- 5. Sur `/`, affichez une simple liste des films, la version publique.
+     Pour chacune des routes, assurez vous d'isoler le code dans des composants appelés plusieurs fois si nécessaire, mais sans dupliquer de code source.
 
-Ajoutez `lang="scss"` aux balises de style quand vous voulez écrire du SASS.
+##### Ressources
 
-```html
-<style lang="scss">
-  // On peut maintenant utiliser Sass !
-</style>
-```
+https://vueschool.io/courses/vue-router-for-everyone
+Les 3 lecons du chapitre "Introduction to Vue Router"
 
-1. Choisissez une couleur principale et [créez lui une variable](https://sass-lang.com/guide#topic-2).
-2. Créez une seconde variable contenant un version assombrie de votre couleur principale [grâce à la fonction `darken()`](https://sass-lang.com/documentation/modules/color#darken).
-3. Définissez un style de bouton qui a comme couleur de fond votre couleur principale, et au survol la version assombrie. Utilise le nesting et [le sélecteur parent](https://sass-lang.com/documentation/style-rules/parent-selector) pour simplifier la déclaration
-4. Mettez en forme le composant `Movie` selon vos goûts, grâce à Sass.
 
-## 6. Utiliser un composant externe
-
-Pour renseigner la note d'un film dans `MovieCreation`, on se rend compte que la saisie utilisateur pourrait être facilitée en utilisant un contrôle "Star rating".
-En cherchant ce type d'élément d'interface adapté pour Vue, on découvre le framework Material Design **Vuetify**, qui contient un composant de Star Rating.
-
-- 1. Installez le framework dans votre projet grâce à la commande dans le CLI, et **choisir le preset Prototype (rapid development)**.
-     https://vuetifyjs.com/en/getting-started/quick-start/#vue-cli-install
-     ![image](https://user-images.githubusercontent.com/632197/114319012-e0026480-9b0f-11eb-8ee0-122f0b117a62.png)
-
-- 2. Dans `MovieCreation`, appelez le composant `v-rating` en lui passant bien votre donnée.
-     https://vuetifyjs.com/en/components/ratings/
-- 2. Dans `Movie`, appelez le composant `v-rating` en mode non éditable, pour afficher la note uniquement.
-
-En passant par vue-cli pour l'installation, Vuetify sera installé dans l'app entière, en global.
-
-Envie de charger les composants de Vuetify manuellement, un à un ? C'est aussi possible, voir https://vuetifyjs.com/en/features/treeshaking/#manually-importing
-
-## 7. Requêter une API pour proposer une auto-suggestion de film
+## 8. Requêter une API pour proposer une auto-suggestion de film
 
 Pour facilier l'ajout de film à notre liste, on veut maintenant proposer un autocomplete depuis le champ de saisie du titre. Dans cette liste de suggestion, le clic sur un film remplira rapidement les champs du formulaire d'ajout.
 
@@ -262,6 +291,16 @@ axios.get(URL_DE_LAPI).then((response) => {
   TRAITEMENT_DE_LA_REPONSE;
 });
 ```
+### Aller plus loin avec l'API
+Vous allez pouvoir utiliser l'api créée lors de l'exercice sur NodeJs
+En vous servant des différents enpoints fait lors de l'exercice NodeJs vous ajouterez dans votre application :
+    
+    - Une liste de films venant de votre api
+    - Vous mettrez à jour le fiche du film pour avoir les commentaires
+    - La possibilité de mettre à jour et de noter les films
+    - La possibilité de supprimer un film
+
+
 
 Présentation des Promises ( then et catch ):
 https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise
@@ -270,31 +309,6 @@ Guide sur les Promises :
 https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses
 
 Utiliser async/await, les fonctions asynchrones de ES2017 : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/async_function
-
-## 8. Router : afficher les détails d'un film dans une page en ajoutant manuellement le routeur
-
-Depuis notre liste, on souhaite pouvoir afficher le détail d'un film pour voir sa description et l'avis que vous lui avez donné. Pour cela on souhaite pouvoir naviguer sur une page dédiée, et on a donc besoin d'ajouter un router à notre application.
-
-Cela tombe bien, Vue a un routeur tout prêt que nous allons utiliser, [vue-router](https://router.vuejs.org/fr/)
-
-Pour l'utilisation, nous allons avoir besoin des deux composants fournis par Vue Router :
-
-- `<router-view>` affiche le contenu de la route correspondant au composant spécifié dans la déclaration.
-- `<router-link>` permet de passer d'une page à l'autre.
-
-- 1. Installez la librarie `vue-router`. Définissez ensuite une table de router, une instance du plugin que vous importerez dans votre fichier `main.js` pour l'ajouter à l'instance de Vue de votre application. Alternativement, utilisez le `vue-cli` pour l'installation.
-- 2. Déclarez deux routes simple :
-  - une `/` qui affiche un message d'accueil.
-  - une `/admin` qui affiche la liste des films avec le formulaire d'ajout.
-- 3. Affichez un menu de navigation sur ces deux pages pour passer de l'une à l'autre.
-- 4. Créez une page pour afficher un film unique. Pour cela définissez la route `/movie/<id_du_film>` qui affichera un film en pleine page, donc notre composant `Movie`. Ajoutez également un lien depuis la liste de films qui amène à cette page de détail.
-- 5. Sur `/`, affichez une simple liste des films, la version publique.
-     Pour chacune des routes, assurez vous d'isoler le code dans des composants appelés plusieurs fois si nécessaire, mais sans dupliquer de code source.
-
-##### Ressources
-
-https://vueschool.io/courses/vue-router-for-everyone
-Les 3 lecons du chapitre "Introduction to Vue Router"
 
 ## 9. Déploiement : publier l'application
 
@@ -339,3 +353,19 @@ Depuis votre repo sur GitHub :
 - Choisissez comme "source" la branche `gh-pages`
 
 Votre projet sera disponible à l'adresse indiquée.
+
+## 10. Bonus
+
+Pour mieux gérer les différents appels à l'API, il serait bien de mettre en place une gestion centralisée.
+
+VueX est un store qui nous permet de faire cela la doc est disponible : https://vuex.vuejs.org/fr/
+
+En vous inspirant des resources mettre en place VueX dans votre application et faire en sorte que tous les appels aux APIs se fassent dans le store.
+### Ressources
+
+https://openclassrooms.com/fr/courses/6390311-creez-une-application-web-avec-vue-js/6870776-modifiez-vos-donnees-dans-vuex
+
+https://openclassrooms.com/fr/courses/6390311-creez-une-application-web-avec-vue-js/6870051-recuperez-des-donnees-depuis-vuex
+
+https://blog.logrocket.com/how-to-consume-apis-with-vuex-and-axios/
+
