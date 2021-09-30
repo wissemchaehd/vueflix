@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Movie></Movie>
     <label for="filtrer"> Filtrer par Genre</label><br>
 
     <select v-model="selected" id="filtrer">
@@ -17,8 +18,8 @@
     <div v-for="movie in  filtermovies" :key="movie.id">
        <h1>{{ movie.title }} :</h1>
       <h3>Genre de film : {{ movie.genres }}</h3>
-      <h3>Evaluation : {{ movie.rating }}</h3>
-      <p> ID {{movie.id}}</p>
+      <h2>Evaluation : {{ movie.rating }}</h2>
+
 
     </div>
     <p>
@@ -80,8 +81,14 @@
 </template>
 
 <script>
+import Movie from "./components/Movie";
 export default {
+
   name: 'App',
+  components: {
+    Movie,
+  },
+
   data: function () {
     return {
       title: "Bienvenue sur VueFlix ",
@@ -104,6 +111,7 @@ export default {
           description: "Parasite (Korean: 기생충; RR: Gisaengchoong) is a 2019 South Korean black comedy thriller film directed by Bong Joon-ho, who also co-wrote the screenplay with Han Jin-won."
         },
         {
+
           id: 2,
           title: "Matrix",
           genres: ["science-fiction", "action"],
@@ -161,9 +169,10 @@ export default {
 
 <style>
 #app {
-  background: #e2cccc;
-  margin-top: 60px;
-  : auto;
+  background: #e5e7f5;
+
+  margin:50px;
+  text-align: center;
 }
 
 </style>
