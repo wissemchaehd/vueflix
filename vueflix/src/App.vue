@@ -1,88 +1,48 @@
 <template>
+
         <div id="app">
-          <Movie></Movie>
-          <label for="filtrer"> Filtrer par Genre</label><br>
+          <v-app>
+          <H1>Bienvenue sur Votre VueFlix !</H1>
+            <p> Nombre de films {{moviesLength}}</p>
+            <label for="filtrer"> Filtrer par Genre</label><br>
+            <select v-model="selected" id="filtrer">
+              <option value="comedy">Adventure</option>
+              <option value="drama">Drama</option>
+              <option value="thriller">Thriller</option>
+              <option value="action">Fantastic</option>
+              <option value="comedy">Comedy</option>
+              <option value="action">Action</option>
+              <option value="science-fiction">Science-fiction</option>
+            </select>
 
-          <select v-model="selected" id="filtrer">
-
-            <option value="comedy">Adventure</option>
-            <option value="drama">Drama</option>
-            <option value="thriller">Thriller</option>
-            <option value="action">Fantastic</option>
-            <option value="comedy">Comedy</option>
-            <option value="action">Action</option>
-            <option value="science-fiction">Science-fiction</option>
-          </select>
-
-          <p> Nombre de films {{moviesLength}}</p>
-          <div v-for="movie in  filtermovies" :key="movie.id">
-            <h1>{{ movie.title }} :</h1>
-            <h3>Genre de film : {{ movie.genres }}</h3>
-            <h2>Evaluation : {{ movie.rating }}</h2>
+          <Movie v-for="movie in filtermovies" :key="movie.id" :movie ="movie"/>
+            <MovieCreation :addnewmovies = "addmovie"/>
 
 
-          </div>
-          <p>
-            <label for="name">Titre</label>
-            <input
-                id="name"
-                v-model="addmovie.title"
-                type="text"
-                name="name"
-            >
-          </p>
-          <p>
-            <label for="genre">Genre</label>
-            <input
-                id="genre"
-                v-model="addmovie.genres"
-                type="text"
-                name="genre"
-            >
-          </p>
 
-          <p>
-            <label for="review">Review</label>
-            <input
-                id="review"
-                v-model="addmovie.review"
-                type="text"
-                name="review"
-            >
-          </p>
-          <p>
-            <label for=" description"> Description</label>
-            <input
-                id=" description"
-                v-model="addmovie.description"
-                type="text"
-                name=" description"
-            >
-          </p>
-          <p>
-            <button v-on:click="add()">Add New movie</button>
-          </p>
 
+          </v-app>
 
         </div>
-
 
       </template>
 
       <script>
         import Movie from "./components/Movie";
+        import MovieCreation from "./components/MovieCreation";
         export default {
 
           name: 'App',
           components: {
-            Movie,
+           Movie,
+           MovieCreation,
           },
 
           data: function () {
             return {
               title: "Bienvenue sur VueFlix ",
               selected: "",
-              addmovie :
+              newmovie :
                   {
                     title: "",
                     genres: [],
@@ -121,21 +81,24 @@
               ],
             }
           },
-          methods: {
-            add: function () {
 
+          methods:{
+            addmovie(newmovie) {
               this.movies.push({
                 id : this.movies.length + 1,
-                title: this.addmovie.title,
-                genres: this.addmovie.genres,
-                rating: this.addmovie.rating,
-                review: this.addmovie.review,
-                description: this.addmovie.description
+                title: newmovie.title,
+                genres: newmovie.genres,
+                rating: newmovie.rating,
+                review: newmovie.review,
+                description: newmovie.description
               });
 
+          }
 
-            },
+
+
           },
+
           computed: {
 
 
@@ -156,24 +119,21 @@
       </script>
 
 <style lang="scss">
-$bg-color: #f1dfdf;
+$bg-color: #5f5757;
 
 #app {
 
   font-family: Avenir, Helvetica, Arial, sans-seri;
   text-align: center;
+  color: white;
   background: $bg-color;
   margin-top: 60px;
+
   line-height :2;
 };
   h1:hover{
   background : darken(#db0e20, 20%)
   };
-
-
-
-
-
 
 </style>
 

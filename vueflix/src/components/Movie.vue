@@ -1,32 +1,18 @@
 <template>
   <div id="Movie">
-
-    <h1>{{ movie.title }} :</h1>
-    <h3>Genre de film : {{ movie.genres }}</h3>
-    <h2>Evaluation : {{ movie.rating }}</h2>
-    <div class="text-center mt-12">
-      <v-rating
-          v-model="rating"
-          color="yellow darken-3"
-          background-color="grey darken-1"
-          empty-icon="$ratingFull"
-          half-increments
-          hover
-          large
-      ></v-rating>
+    <h1>{{movie.title }}</h1>
+    <p>Genre {{movie.genres}}</p>
+    <p>Evaluation
+    <v-rating   v-model="movie.rating" length="10" color="yellow darken-3" ></v-rating>
+    </p>
 </div>
-  </div>
 </template>
 
 <script>
 export default {
   name: "Movie",
   props: {
-    title: String,
-    genres: [],
-    rating: Number,
-    review: String,
-    description:String,
+   movie: Object,
 },
 }
 </script>
