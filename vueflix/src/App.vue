@@ -4,7 +4,7 @@
           <v-app>
           <H1>Bienvenue sur Votre VueFlix !</H1>
             <p> Nombre de films {{moviesLength}}</p>
-            <label for="filtrer"> Filtrer par Genre</label><br>
+            <label for="filtrer"> Filtrer par Genre</label>
             <select v-model="selected" id="filtrer">
               <option value="comedy">Adventure</option>
               <option value="drama">Drama</option>
@@ -17,7 +17,8 @@
 
           <Movie v-for="movie in filtermovies" :key="movie.id" :movie ="movie"/>
 <!--            <MovieCreation :addnewmovies = "addmovie"/>-->
-            <MovieCreation  @addnewmovies="setMessage" />
+<!--            <MovieCreation  @addnewmovies="setMessage" />-->
+            <MovieCreation></MovieCreation>
 
 
 
@@ -30,19 +31,20 @@
       <script>
         import Movie from "./components/Movie";
         import MovieCreation from "./components/MovieCreation";
+        import {EventBus} from './event-bus';
         export default {
 
           name: 'App',
           components: {
-           Movie,
-           MovieCreation,
+            Movie,
+            MovieCreation,
           },
 
           data: function () {
             return {
               title: "Bienvenue sur VueFlix ",
               selected: "",
-              newmovie :
+              newmovie:
                   {
                     title: "",
                     genres: [],
@@ -73,7 +75,7 @@
                   title: "The Revenant",
                   genres: ["Adventure", "Epic Western"],
                   rating: 9,
-                  review: "simply one of the most impressive performances ever seen in the cinema.DiCaprio is stratospheric, unreal One is struck by the force of the scenes, by their harshness. We are literally living this film, this extraordinary human adventure" ,
+                  review: "simply one of the most impressive performances ever seen in the cinema.DiCaprio is stratospheric, unreal One is struck by the force of the scenes, by their harshness. We are literally living this film, this extraordinary human adventure",
 
                   description: "During an expedition to a deeply wild America, legendary trapper Hugh Glass is brutally attacked by a bear and left for dead by members of his own team. In his quest for survival, Glass endures unimaginable suffering as well as the betrayal of his trusted man, John Fitzgerald. Guided by the will and love of his family, Glass must face a brutal winter in an inexorable struggle to survive and find redemption."
                 },
@@ -82,42 +84,48 @@
             }
 
           },
-          // methods:{
-          //   addmovie(newmovie) {
-          //     this.movies.push({
-          //       id : this.movies.length + 1,
-          //       title: newmovie.title,
-          //       genres: newmovie.genres,
-          //       rating: newmovie.rating,
-          //       review: newmovie.review,
-          //       description: newmovie.description
-          //     });
-          //
-          // }
-          // },
           methods: {
-            setMessage(payload) {
-              this.newmovie = payload
-              this.movies.push(this.newmovie);
-            }
-
+            addmovie(newmovie) {
+              this.movies.push({
+                id: this.movies.length + 1,
+                title: newmovie.title,
+                genres: newmovie.genres,
+                rating: newmovie.rating,
+                review: newmovie.review,
+                description: newmovie.description
+              });
+              //
+              // }
+              // },
+              // methods: {
+              //   setMessage(payload) {
+              //     this.newmovie = payload
+              //     this.movies.push(this.newmovie);
+              //   }
+              //
+            },
           },
-          computed: {
-
-            filtermovies: function () {
-              if (this.selected == "") {
-                return this.movies;
-              } else {
-                return this.movies.filter(movie => movie.genres.includes(this.selected));
-
-              }
+            mounted() {
+              EventBus.$on('add-emit', (payload) => {
+                this.addmovie(payload)
+              });
             },
 
-            moviesLength: function () {
-              return this.filtermovies.length;
-            },
-          }
-        };
+            computed: {
+              filtermovies: function () {
+                if (this.selected == "") {
+                  return this.movies;
+                } else {
+                  return this.movies.filter(movie => movie.genres.includes(this.selected));
+
+                }
+              },
+
+              moviesLength: function () {
+                return this.filtermovies.length;
+              },
+            }
+          };
 
       </script>
 
@@ -137,6 +145,13 @@ $bg-color: #110b0b;
   h1:hover{
   background : darken(#db0e20, 20%)
   };
+
+#app input{
+  background-color: aliceblue;
+}
+#app select{
+  background-color: aliceblue;
+}
 
 </style>
 

@@ -4,7 +4,7 @@
   <div id="MovieCreation">
 
 
-<form>
+
   <p>
     <label for="name">Titre</label>
     <input
@@ -51,14 +51,15 @@
 
 
 <!--    <button class= "button" type="submit" @click="add()">Add</button>-->
-    <button type="button" @click="emitCustomEvent()">Add</button>
+<!--    <button type="button" @click="emitCustomEvent()">Add</button>-->
+    <button type="button" @click="emitAddEvent">Add</button>
 
-</form>
   </div>
 
 </template>
 
 <script>
+import { EventBus } from '@/event-bus';
 export default {
   name: "MovieCreation",
 
@@ -78,13 +79,18 @@ export default {
   //   addnewmovies: Function,
   // },
   methods: {
+   // --technique avec props --
     // add() {
     //   this.addnewmovies(this.newmovie)
-      emitCustomEvent()
-      {
-        this.$emit("addnewmovies", this.newmovie)
-
-      }
+    // technique parent enfant --
+    //   emitCustomEvent()
+    //   {
+    //     this.$emit("addnewmovies", this.newmovie)
+    //
+    //   }
+    emitAddEvent() {
+      EventBus.$emit("add-emit", this.newmovie);
+    },
   },
 
 }
