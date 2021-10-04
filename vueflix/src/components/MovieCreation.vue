@@ -4,7 +4,7 @@
   <div id="MovieCreation">
 
 
-
+<form>
   <p>
     <label for="name">Titre</label>
     <input
@@ -48,11 +48,12 @@
         length="10" color="yellow darken-3"
     ></v-rating>
     </p>
-  <p>
 
-    <button class= "button" type="submit" @click="add()">Add</button>
-  </p>
 
+<!--    <button class= "button" type="submit" @click="add()">Add</button>-->
+    <button type="button" @click="emitCustomEvent()">Add</button>
+
+</form>
   </div>
 
 </template>
@@ -73,15 +74,18 @@ export default {
     }
 
   },
-  props: {
-    addnewmovies: Function,
-  },
+  // props: {
+  //   addnewmovies: Function,
+  // },
   methods: {
-    add() {
-        this.addnewmovies(this.newmovie)
-      },
-  },
+    // add() {
+    //   this.addnewmovies(this.newmovie)
+      emitCustomEvent()
+      {
+        this.$emit("addnewmovies", this.newmovie)
 
+      }
+  },
 
 }
 </script>

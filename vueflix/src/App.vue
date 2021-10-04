@@ -16,8 +16,8 @@
             </select>
 
           <Movie v-for="movie in filtermovies" :key="movie.id" :movie ="movie"/>
-            <MovieCreation :addnewmovies = "addmovie"/>
-
+<!--            <MovieCreation :addnewmovies = "addmovie"/>-->
+            <MovieCreation  @addnewmovies="setMessage" />
 
 
 
@@ -46,7 +46,7 @@
                   {
                     title: "",
                     genres: [],
-                    rating: 0 ,
+                    rating: "",
                     review: "",
                     description: "",
                   },
@@ -80,27 +80,29 @@
 
               ],
             }
-          },
-
-          methods:{
-            addmovie(newmovie) {
-              this.movies.push({
-                id : this.movies.length + 1,
-                title: newmovie.title,
-                genres: newmovie.genres,
-                rating: newmovie.rating,
-                review: newmovie.review,
-                description: newmovie.description
-              });
-
-          }
-
-
 
           },
+          // methods:{
+          //   addmovie(newmovie) {
+          //     this.movies.push({
+          //       id : this.movies.length + 1,
+          //       title: newmovie.title,
+          //       genres: newmovie.genres,
+          //       rating: newmovie.rating,
+          //       review: newmovie.review,
+          //       description: newmovie.description
+          //     });
+          //
+          // }
+          // },
+          methods: {
+            setMessage(payload) {
+              this.newmovie = payload
+              this.movies.push(this.newmovie);
+            }
 
+          },
           computed: {
-
 
             filtermovies: function () {
               if (this.selected == "") {
@@ -115,11 +117,12 @@
               return this.filtermovies.length;
             },
           }
-        }
+        };
+
       </script>
 
 <style lang="scss">
-$bg-color: #5f5757;
+$bg-color: #110b0b;
 
 #app {
 
