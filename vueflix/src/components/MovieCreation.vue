@@ -68,26 +68,15 @@ export default {
       newmovie: {
         title: "",
         genres: [],
-        rating:"",
+        rating:0,
         review: "",
         description:"",
       },
     }
 
   },
-  // props: {
-  //   addnewmovies: Function,
-  // },
+
   methods: {
-   // --technique avec props --
-    // add() {
-    //   this.addnewmovies(this.newmovie)
-    // technique parent enfant --
-    //   emitCustomEvent()
-    //   {
-    //     this.$emit("addnewmovies", this.newmovie)
-    //
-    //   }
     emitAddEvent() {
       EventBus.$emit("add-emit", this.newmovie);
     },
