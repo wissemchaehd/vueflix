@@ -6,13 +6,25 @@
 
 
   <p>
+    <v-autocomplete
+        v-model="newmovie"
+        :items="searchtitle "
+        item-text="title"
+        dense
+        filled
+        label="recherche film"
+        return-object
+    ></v-autocomplete>
+
     <label for="name">Titre</label>
     <input
         id="name"
         v-model="newmovie.title"
         type="text"
         name="name"
+        @keypress="getResult"
     >
+
   </p>
   <p>
     <label for="genre">Genre</label>
@@ -28,7 +40,7 @@
     <label for="review">Review</label>
     <input
         id="review"
-        v-model="newmovie.review"
+        v-model="newmovie.overview"
         type="text"
         name="review"
     >
@@ -60,16 +72,21 @@
 
 <script>
 import { EventBus } from '@/event-bus';
+import axios from "axios";
 export default {
   name: "MovieCreation",
 
   data: function () {
     return {
+      searchtitle: [],
+      loading: false,
+      error: null,
+
       newmovie: {
         title: "",
         genres: [],
         rating:0,
-        review: "",
+        overview: "",
         description:"",
       },
     }
@@ -77,8 +94,30 @@ export default {
   },
 
   methods: {
+    // l'écoute de l'événement, il EventBus récupère la variable newMovie
     emitAddEvent() {
       EventBus.$emit("add-emit", this.newmovie);
+    },
+    getResult(){
+      {
+        this.searchtitle=[];
+        axios
+            .get(`https://api.themoviedb.org/3/search/movie?api_key=80d0dd074cbffeb2db4b0123882c7f44&query=`+ this.newmovie.title)
+            .then((response) => {
+              this.searchtitle = response.data.results;
+              console.log(response.data.results)
+              this.loading = false;
+            })
+            .catch((error) => {
+              this.error = error;
+            })
+      }
+    },
+
+  },
+  watch: {
+    search (val) {
+      this.getResult(val)
     },
   },
 

@@ -6,7 +6,7 @@
     <router-link to="/Admin"> <v-btn type="button">cliquez ici</v-btn></router-link>
     <router-view></router-view>
 
-</div>
+  </div>
       </template>
 
       <script>

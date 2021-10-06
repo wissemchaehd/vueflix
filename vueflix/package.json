@@ -13,6 +13,7 @@
     "make:view": "vue-cli-service make:view"
   },
   "dependencies": {
+    "axios": "^0.22.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.5.2",

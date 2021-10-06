@@ -1,7 +1,7 @@
 <template>
   <div id="admin">
     <v-app>
-      <p> Nombre de films {{moviesLength}}</p>
+      <p> Nombre de films {{ moviesLength }}</p>
 
       <label for="filtrer"> Filtrer par Genre</label>
       <select v-model="selected" id="filtrer" >
@@ -15,8 +15,8 @@
         <option value="science-fiction">Science-fiction</option>
       </select>
 
-      <Movie v-for="movie in filtermovies" :key="movie.id" :movie ="movie"/>
-<br>
+      <Movie v-for="movie in filtermovies" :key="movie.id" :movie="movie"/>
+      <br>
       <MovieCreation></MovieCreation>
 
 
@@ -29,6 +29,7 @@
 import Movie from "../components/Movie";
 import MovieCreation from "../components/MovieCreation";
 import {EventBus} from '../event-bus';
+
 export default {
 
   name: 'Admin',
@@ -42,11 +43,11 @@ export default {
       selected: "",
       newmovie:
           {
-            id:"",
+            id: "",
             title: "",
             genres: [],
             rating: "",
-            review: "",
+            overview: "",
             description: "",
           },
       movies: [
@@ -55,7 +56,7 @@ export default {
           title: "Parasite",
           genres: ["comedy", "drama"],
           rating: 8,
-          review: "With an insightful and searing exploration of human behavior, ‘Parasite’ is a masterfully crafted film that is a definite must watch.",
+          overview: "With an insightful and searing exploration of human behavior, ‘Parasite’ is a masterfully crafted film that is a definite must watch.",
           description: "Parasite (Korean: 기생충; RR: Gisaengchoong) is a 2019 South Korean black comedy thriller film directed by Bong Joon-ho, who also co-wrote the screenplay with Han Jin-won."
         },
         {
@@ -64,7 +65,7 @@ export default {
           title: "Matrix",
           genres: ["science-fiction", "action"],
           rating: 10,
-          review: "Thomas Anderson, a dreary computer scientist by day, turns into a hacker nicknamed Neo. A question grips him during his insomnia: what is the Matrix? The answer will be drawn to him by Morpheus.",
+          overview: "Thomas Anderson, a dreary computer scientist by day, turns into a hacker nicknamed Neo. A question grips him during his insomnia: what is the Matrix? The answer will be drawn to him by Morpheus.",
           description: "Matrix is ​​an exciting and formidable film, exciting and exciting and above all much smarter than the “big show action” label might lead you to believe."
         },
         {
@@ -72,7 +73,7 @@ export default {
           title: "The Revenant",
           genres: ["Adventure", "Epic Western"],
           rating: 9,
-          review: "simply one of the most impressive performances ever seen in the cinema.DiCaprio is stratospheric, unreal One is struck by the force of the scenes, by their harshness. We are literally living this film, this extraordinary human adventure",
+          overview: "simply one of the most impressive performances ever seen in the cinema.DiCaprio is stratospheric, unreal One is struck by the force of the scenes, by their harshness. We are literally living this film, this extraordinary human adventure",
 
           description: "During an expedition to a deeply wild America, legendary trapper Hugh Glass is brutally attacked by a bear and left for dead by members of his own team. In his quest for survival, Glass endures unimaginable suffering as well as the betrayal of his trusted man, John Fitzgerald. Guided by the will and love of his family, Glass must face a brutal winter in an inexorable struggle to survive and find redemption."
         },
@@ -88,7 +89,7 @@ export default {
         title: newmovie.title,
         genres: newmovie.genres,
         rating: newmovie.rating,
-        review: newmovie.review,
+        overview: newmovie.overview,
         description: newmovie.description
       });
     },
@@ -109,6 +110,8 @@ export default {
       return this.filtermovies.length;
     },
   },
+  // EventBus.$on est un écouteur d'événement. Il écoute l'event en 1er parametre (add-emit) et quand ca se produit (donc quand j'envoi mon formulaire) le
+  // // composant App.vue va exécuter le 2eme paramètre en utilisant la variable newMovie que je lui ai envoyé depuis MovieCreation)
   mounted() {
     EventBus.$on('add-emit', (payload) => {
       this.addmovie(payload)
