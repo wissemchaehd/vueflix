@@ -1,18 +1,20 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
-
+// import Admin from './components/Admin'
 import VueRouter from 'vue-router'
-import Admin from './components/Admin'
 import Movie from './components/Movie'
+import Accueil from './components/Accueil'
+import MovieCreation from "@/components/MovieCreation";
 
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 const routes = [
-  {path:'/admin',component: Admin},
-  {path: '/movie/:id', name:"movie", component: Movie, props: true}
+  {path:'/admin',name:'admin',component: MovieCreation},
+  {path: '/movie/:id', name:"movie", component: Movie, props: true},
+  { path: '/accueil', name: 'accueil', component: Accueil, props: true},
 
 ]
 

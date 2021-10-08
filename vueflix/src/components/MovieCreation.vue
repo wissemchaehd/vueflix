@@ -1,14 +1,13 @@
 <template>
 
-
+  <v-app>
   <div id="MovieCreation">
-
 
 
   <p>
     <v-autocomplete
         v-model="newmovie"
-        :items="searchtitle "
+        :items="searchtitle"
         item-text="title"
         dense
         filled
@@ -22,19 +21,20 @@
         v-model="newmovie.title"
         type="text"
         name="name"
-        @keypress="getResult"
+        @keyup="getResult"
     >
-
   </p>
+    <br>
   <p>
     <label for="genre">Genre</label>
     <input
         id="genre"
-        v-model="newmovie.genres"
+        v-model="newmovie.genre_ids"
         type="text"
         name="genre"
     >
   </p>
+    <br>
 
   <p>
     <label for="review">Review</label>
@@ -45,6 +45,7 @@
         name="review"
     >
   </p>
+    <br>
   <p>
     <label for=" description"> Description</label>
     <input
@@ -67,7 +68,7 @@
     <button type="button" @click="emitAddEvent">Add</button>
 
   </div>
-
+    </v-app>
 </template>
 
 <script>
@@ -84,9 +85,9 @@ export default {
 
       newmovie: {
         title: "",
-        genres: [],
+        genre_ids: [],
         rating:0,
-        overview: "",
+        overview:"",
         description:"",
       },
     }
@@ -97,6 +98,7 @@ export default {
     // l'écoute de l'événement, il EventBus récupère la variable newMovie
     emitAddEvent() {
       EventBus.$emit("add-emit", this.newmovie);
+      console.log('alo');
     },
     getResult(){
       {
@@ -107,13 +109,13 @@ export default {
               this.searchtitle = response.data.results;
               console.log(response.data.results)
               this.loading = false;
+              this.error= null;
             })
             .catch((error) => {
               this.error = error;
             })
       }
     },
-
   },
   watch: {
     search (val) {

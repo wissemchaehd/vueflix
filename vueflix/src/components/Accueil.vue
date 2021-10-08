@@ -1,60 +1,62 @@
 <template>
-  <div id="admin">
-    <v-app>
-      <p> Nombre de films {{ moviesLength }}</p>
+  <v-app>
+  <p> Nombre de films {{ moviesLength }}</p>
 
-      <label for="filtrer"> Filtrer par Genre</label>
-      <select v-model="selected" id="filtrer" >
-        <option value="">Tous les genres</option>
-        <option value="comedy">Adventure</option>
-        <option value="drama">Drama</option>
-        <option value="thriller">Thriller</option>
-        <option value="action">Fantastic</option>
-        <option value="comedy">Comedy</option>
-        <option value="action">Action</option>
-        <option value="science-fiction">Science-fiction</option>
-      </select>
+  <label for="filtrer"> Filtrer par Genre</label>
+  <select v-model="selected" id="filtrer" >
+    <option value="">Tous les genres</option>
+    <option value="comedy">Adventure</option>
+    <option value="drama">Drama</option>
+    <option value="thriller">Thriller</option>
+    <option value="action">Fantastic</option>
+    <option value="comedy">Comedy</option>
+    <option value="action">Action</option>
+    <option value="science-fiction">Science-fiction</option>
+  </select>
+    <div v-for="movie in filtermovies" :key="movie.id">
+     <h1>{{movie.title }}</h1>
+      <ul>
+        <li>Genre: {{movie.genres}}</li>
+        <li>review: {{movie.overview}}</li>
+        <li>description: {{movie.description}}</li>
+        <li>Evaluation : {{movie.rating}}</li>
+        <li> <v-rating v-model="movie.rating" length="10" color="yellow darken-3" ></v-rating></li>
 
-      <Movie v-for="movie in filtermovies" :key="movie.id" :movie="movie"/>
-      <br>
-      <MovieCreation></MovieCreation>
+        <li>
+          <router-link
+              :to="{ name: 'movie', params: { id: movie.id, movie: movie } }"
+          >
+            <v-btn type="button" color="primary">Afficher Détails</v-btn>
 
+          </router-link>
+        </li>
+      </ul>
 
-    </v-app>
-
-  </div>
+    </div>
+  </v-app>
 </template>
 
 <script>
-import Movie from "../components/Movie";
-import MovieCreation from "../components/MovieCreation";
-import {EventBus} from '../event-bus';
+
 
 export default {
-
-  name: 'Admin',
+  name: "Accueil",
   components: {
-    Movie,
-    MovieCreation,
   },
-
+  props: {
+    movies: {
+      type: Array,
+    },
+  },
   data: function () {
     return {
       selected: "",
-      newmovie:
-          {
-            id: "",
-            title: "",
-            genres: [],
-            rating: "",
-            overview: "",
-            description: "",
-          },
-      movies: [
+
+   films: [
         {
           id: 1,
           title: "Parasite",
-          genres: ["comedy", "drama"],
+          genre_ids: ["comedy", "drama"],
           rating: 8,
           overview: "With an insightful and searing exploration of human behavior, ‘Parasite’ is a masterfully crafted film that is a definite must watch.",
           description: "Parasite (Korean: 기생충; RR: Gisaengchoong) is a 2019 South Korean black comedy thriller film directed by Bong Joon-ho, who also co-wrote the screenplay with Han Jin-won."
@@ -63,7 +65,7 @@ export default {
 
           id: 2,
           title: "Matrix",
-          genres: ["science-fiction", "action"],
+          genre_ids: ["science-fiction", "action"],
           rating: 10,
           overview: "Thomas Anderson, a dreary computer scientist by day, turns into a hacker nicknamed Neo. A question grips him during his insomnia: what is the Matrix? The answer will be drawn to him by Morpheus.",
           description: "Matrix is ​​an exciting and formidable film, exciting and exciting and above all much smarter than the “big show action” label might lead you to believe."
@@ -71,7 +73,7 @@ export default {
         {
           id: 3,
           title: "The Revenant",
-          genres: ["Adventure", "Epic Western"],
+          genre_ids: ["Adventure", "Epic Western"],
           rating: 9,
           overview: "simply one of the most impressive performances ever seen in the cinema.DiCaprio is stratospheric, unreal One is struck by the force of the scenes, by their harshness. We are literally living this film, this extraordinary human adventure",
 
@@ -80,44 +82,33 @@ export default {
 
       ],
     }
-
   },
   methods: {
-    addmovie(newmovie) {
-      this.movies.push({
-        id: this.movies.length + 1,
-        title: newmovie.title,
-        genres: newmovie.genres,
-        rating: newmovie.rating,
-        overview: newmovie.overview,
-        description: newmovie.description
-      });
-    },
+
   },
-
-
   computed: {
     filtermovies: function () {
       if (this.selected == "") {
-        return this.movies;
+        return this.films;
       } else {
-        return this.movies.filter(movie => movie.genres.includes(this.selected));
-
+        return this.films.filter((movie) =>
+            movie.genres.includes(this.selected)
+        );
       }
     },
-
     moviesLength: function () {
       return this.filtermovies.length;
     },
   },
-  // EventBus.$on est un écouteur d'événement. Il écoute l'event en 1er parametre (add-emit) et quand ca se produit (donc quand j'envoi mon formulaire) le
-  // // composant App.vue va exécuter le 2eme paramètre en utilisant la variable newMovie que je lui ai envoyé depuis MovieCreation)
   mounted() {
-    EventBus.$on('add-emit', (payload) => {
-      this.addmovie(payload)
-    });
+    if (this.movies != undefined) {
+      this.films = this.movies;
+    }
   },
-};
+  destroyed() {
+    console.log('composent detruit')
+  }
+}
 </script>
 
 <style scoped>
