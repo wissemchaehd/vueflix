@@ -118,11 +118,10 @@ export default {
     },
   },
   watch: {
-    search (val) {
-      this.getResult(val)
-    },
-  },
-
+    newmovie: function () {
+      console.log(this.newmovie)
+    }
+  }
 }
 </script>
 

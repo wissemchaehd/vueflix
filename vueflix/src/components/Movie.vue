@@ -4,7 +4,7 @@
 
     <h1>{{movie.title }}</h1>
     <ul>
-      <li>Genre: {{movie.genres}}</li>
+      <li>Genre: {{movie. genre_ids}}</li>
       <li>review: {{movie.overview}}</li>
       <li>description: {{movie.description}}</li>
       <li>Evaluation : {{movie.rating}}</li>

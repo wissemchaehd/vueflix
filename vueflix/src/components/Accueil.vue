@@ -16,7 +16,7 @@
     <div v-for="movie in filtermovies" :key="movie.id">
      <h1>{{movie.title }}</h1>
       <ul>
-        <li>Genre: {{movie.genres}}</li>
+        <li>Genre: {{movie. genre_ids}}</li>
         <li>review: {{movie.overview}}</li>
         <li>description: {{movie.description}}</li>
         <li>Evaluation : {{movie.rating}}</li>
@@ -41,6 +41,7 @@
 
 export default {
   name: "Accueil",
+  selected: "",
   components: {
   },
   props: {
@@ -92,13 +93,25 @@ export default {
         return this.films;
       } else {
         return this.films.filter((movie) =>
-            movie.genres.includes(this.selected)
+            movie.genre_ids.includes(this.selected)
         );
       }
     },
     moviesLength: function () {
       return this.filtermovies.length;
     },
+  },
+  watch:{
+    moviesLength: function (newval, oldval){
+      if (newval > oldval){
+        alert('film ajouter')
+      }
+    },
+    films: function (newval, oldval){
+      if (newval.length > oldval.length){
+        alert('Nouveau film disponible')
+      }
+    }
   },
   mounted() {
     if (this.movies != undefined) {
