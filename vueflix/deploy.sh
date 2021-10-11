@@ -22,11 +22,3 @@ git push -f https://github.com/wissemchaehd/vue-Vueflix.git master:gh-pages
 
 cd -
 
-package.json
-
-"scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "deploy": "deploy.sh"
-  },
